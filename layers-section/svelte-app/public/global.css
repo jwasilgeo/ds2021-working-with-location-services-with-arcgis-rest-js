@@ -48,10 +48,12 @@ button {
 	color: #333;
 	background-color: #f4f4f4;
 	outline: none;
+	cursor: pointer;
 }
 
 button:disabled {
 	color: #999;
+	cursor: not-allowed;
 }
 
 button:not(:disabled):active {
