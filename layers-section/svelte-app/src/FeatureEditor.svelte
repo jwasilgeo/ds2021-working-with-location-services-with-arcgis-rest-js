@@ -1,5 +1,5 @@
-<!-- https://svelte.dev/tutorial/await-blocks -->
 <script>
+  // import arcgis-rest-js methods we want to use
   import {
     addFeatures,
     updateFeatures,
@@ -10,26 +10,33 @@
   export let featureServiceLayerUrl;
   export let featureObject;
 
-  // editable HTML string bound to the <pre> below
-  // TODO: should it be reactively bound to featureObject (start the line with `$:` instead of `let`)??
+  // editable HTML string bound to a <pre> element below,
+  // which is a JSON string representation of the featureObject
   let editableFeatureHtml = JSON.stringify(featureObject, null, 2);
 
-  // react to user changes in the editable HTML string and update the featureObject variable
+  // react to user changes in the editable HTML string
   $: if (editableFeatureHtml) {
     try {
+      // update the featureObject variable by parsing the editable HTML string from JSON into an object
+      // the featureObject will be used by the arcgis-rest-js methods in our button clicks
       featureObject = JSON.parse(editableFeatureHtml);
-      console.log(featureObject);
     } catch (error) {
       console.error(error);
-      // revert the HTML string value back to last valid state
-      editableFeatureHtml = JSON.stringify(featureObject, null, 2);
+      // when there are JSON parsing errors,
+      // we could try to enforce some validation or provide more user feedback
+      // for example, to revert the HTML string value back to last valid state of the featureObject:
+      // editableFeatureHtml = JSON.stringify(featureObject, null, 2);
     }
   }
 
-  // button disabled state
+  // <button> disabled state variables
+  // initially set to only allow adding a new feature
   let addButtonDisabled = false;
   let updateButtonDisabled = true;
   let deleteButtonDisabled = true;
+
+  // content to display the results of arcgis-rest-js feature layer network requests in an element under our action buttons
+  let responseTextContent = "No arcgis-rest-js requests performed yet.";
 
   async function handleAddClick() {
     const response = await addFeatures({
@@ -37,67 +44,70 @@
       features: [featureObject],
     });
 
+    // update the displayed read-only response data
+    responseTextContent = response;
+
     if (!response.addResults[0].success) {
       // stop early if adding a new feature was not successful
       return;
     }
 
     // append the objectId of the newly added feature to the attributes of our feature
-    // we'll need it when we want to make updates
-    // featureObject.attributes.objectId = response.addResults[0].objectId;
-    
-    // TODO: MAKE THIS EASIER TO COMPREHEND
-    const json = JSON.parse(editableFeatureHtml);
-    json.attributes.objectId = response.addResults[0].objectId;
-    editableFeatureHtml = JSON.stringify(json, null, 2);
+    // because we'll need it when we want to make updates or delete the feature in subsequent steps
 
-    // update button disabled state
+    // but to maintain a 1-direction data update flow, we make sure to only change the editable HTML string,
+    // which will then always try to parse from JSON and update the value of the featureObject
+    const objectFromJSON = JSON.parse(editableFeatureHtml);
+    objectFromJSON.attributes.objectId = response.addResults[0].objectId;
+    editableFeatureHtml = JSON.stringify(objectFromJSON, null, 2);
+    // alas, it would have been easier to read if we had done this instead,
+    // but it would have incorrectly tried to run the updating logic defined above in the "wrong direction"
+    // featureObject.attributes.objectId = response.addResults[0].objectId;
+
+    // update <button> disabled state to allow updates and delete
     addButtonDisabled = true;
     updateButtonDisabled = false;
+    deleteButtonDisabled = false;
   }
-  
+
   async function handleUpdateClick() {
     const response = await updateFeatures({
       url: featureServiceLayerUrl,
       features: [featureObject],
     });
-    
-    if (!response.updateResults[0].success) {
-      // stop early if updating the feature was not successful
-      return;
-    }
-    
-    // update button disabled state
-    updateButtonDisabled = true;
-    deleteButtonDisabled = false;
+
+    // update the displayed read-only response data
+    responseTextContent = response;
   }
 
   async function handleDeleteClick() {
     // delete the feature using the objectId of the updated feature
     const objectIdToDelete = featureObject.attributes.objectId;
-    
+
     const response = await deleteFeatures({
       url: featureServiceLayerUrl,
       objectIds: [objectIdToDelete],
-      authentication
     });
+
+    // update the displayed read-only response data
+    responseTextContent = response;
 
     if (!response.deleteResults[0].success) {
       // stop early if deleting the feature was not successful
       return;
     }
 
-    // update button disabled state
+    // update <button> disabled state to only allow adding a new feature
+    addButtonDisabled = false;
+    updateButtonDisabled = true;
     deleteButtonDisabled = true;
   }
 </script>
 
-<!-- on:input="{(e) => editableFeatureHtml = JSON.parse(e.target.textContent)}" -->
-<pre
-  contenteditable="true"
-  bind:textContent={editableFeatureHtml}
-></pre>
+<!-- editable pre element where you can change the JSON of the feature -->
+<pre contenteditable="true" bind:textContent={editableFeatureHtml} />
 
+<!-- buttons with click handlers to add, update, and delete a feature -->
 <button on:click={handleAddClick} disabled={addButtonDisabled}>
   &#x1F195; 1. Add new feature
 </button>
@@ -110,23 +120,24 @@
   &#x1F6AE; 3. Delete it
 </button>
 
+<!-- a read-only pre element to display the results of arcgis-rest-js feature layer network requests -->
+<pre>{JSON.stringify(responseTextContent, null, 2)}</pre>
+
 <style>
   pre {
     margin: 12px auto;
     padding: 6px;
-    border: 2px solid steelblue;
+    border: 2px solid #eee;
     width: max-content;
     text-align: left;
     font-size: 1.2em;
   }
   button {
-    margin: 12px auto;
-    display: block;
+    margin: 0.5em;
     font-size: 1.1em;
   }
-  [contenteditable] {
-		padding: 0.5em;
-		border: 1px solid #eee;
-		border-radius: 4px;
-	}
+  pre[contenteditable] {
+    border: 2px dotted steelblue;
+    border-radius: 4px;
+  }
 </style>
