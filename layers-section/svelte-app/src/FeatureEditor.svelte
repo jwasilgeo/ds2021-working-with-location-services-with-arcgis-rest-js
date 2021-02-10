@@ -109,15 +109,15 @@
 
 <!-- buttons with click handlers to add, update, and delete a feature -->
 <button on:click={handleAddClick} disabled={addButtonDisabled}>
-  &#x1F195; 1. Add new feature
+  🆕 1. Add new feature
 </button>
 
 <button on:click={handleUpdateClick} disabled={updateButtonDisabled}>
-  &#x1F4BE; 2. Update it
+  💾 2. Update it
 </button>
 
 <button on:click={handleDeleteClick} disabled={deleteButtonDisabled}>
-  &#x1F6AE; 3. Delete it
+  🚮 3. Delete it
 </button>
 
 <!-- a read-only pre element to display the results of arcgis-rest-js feature layer network requests -->
