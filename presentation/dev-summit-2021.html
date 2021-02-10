@@ -149,7 +149,17 @@
 				<textarea data-template>
 					## Feature Layers
 
-					<img src="img/arcgis-rest-js-fl-module.png" height="400" alt="ArcGIS Rest JS Feature Layer module">
+					<div style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
+						<img src="img/arcgis-rest-js-fl-module.png" height="400" alt="ArcGIS Rest JS Feature Layer module">
+						<div style="width: 50%; text-align: left;">
+							<p>Functions for</p>
+							<ul>
+								<li>querying features</li>
+								<li>editing features</li>
+							</ul>
+							<p>... in hosted feature layers</p>
+						</div>
+					</div>
 
 					[esri.github.io/arcgis-rest-js/api/feature-layer/](https://esri.github.io/arcgis-rest-js/api/feature-layer/)
 				</textarea>
@@ -158,31 +168,22 @@
 			<section data-markdown data-background="img/2021/dev-summit/bg-2.png">
 				<textarea data-template>
 					## Feature Layers
-					
-					Functions for...
 
-					* querying features
-					* editing features
-						
-					... inside of hosted feature layers
-				</textarea>
-			</section>
+					Usage examples 💡
 
-			<section data-markdown data-background="img/2021/dev-summit/bg-2.png">
-				<textarea data-template>
-					## Feature Layers
+					* Not using any JS maps
 
-					* When?
-						* Not using any JS maps
-						  * User forms, non-spatial charts, etc.
-						* Extending JS map libraries
-						* Nightly feature data updates in a Node.js script
+						* Website user forms 📃, non-spatial charts 📊
+
+					* Extending JS map libraries 🗺️
+
+					* Nightly feature data updates with Node.js
 				</textarea>
 			</section>
 
 			<section data-background="img/2021/dev-summit/bg-2.png">
 				<h2>Query a feature layer</h2>
-					
+
 				<pre><code class="hljs" data-trim data-line-numbers>
 					import {
 					  queryFeatures
@@ -201,7 +202,7 @@
 
 			<section data-background="img/2021/dev-summit/bg-2.png">
 				<h2>Edit feature data</h2>
-					
+
 				<pre><code class="hljs" data-trim data-line-numbers>
 					import {
 					  addFeatures,
@@ -226,7 +227,7 @@
 				<textarea data-template>
 					## [Svelte app](https://svelte.dev/) &amp; editing feature data
 
-					<img src="img/svelte-logo.png" height="100" alt="Svelte and the Feature Layer module" style="margin-bottom: 85px; margin-right: 75px;">
+					<img src="img/svelte-logo.png" height="110" alt="Svelte and the Feature Layer module" style="margin-bottom: 75px; margin-right: 65px;">
 
 					<img src="img/svelte-and-arcgis-rest-js-fl-module.png" height="225" alt="Svelte and the Feature Layer module">
 
