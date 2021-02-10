@@ -109,6 +109,39 @@
 				</textarea>
 			</section>
 
+			<section data-markdown data-background="img/2021/dev-summit/bg-2.png">
+				<textarea data-template>
+					## Routing: Solve Route
+
+					```js
+					const authentication = new ApiKey({
+						key: apiKey // from https://developers.arcgis.com
+					});
+
+					solveRoute({
+						stops: [
+							[-117.195677, 34.056383],
+							[-117.918976, 33.812092]
+						],
+						authentication
+					}).then((response) => {
+						console.log(response);
+					});
+					```
+					[Live Demo](https://codepen.io/gavinr/pen/OJbRwod?editors=0010)
+				</textarea>
+			</section>
+
+			<section data-markdown data-background="img/2021/dev-summit/bg-2.png">
+				<textarea data-template>
+					### Routing: With Leaflet
+					![Routing with Leaflet - screenshot](img/routing-with-leaflet.png)
+					[Live Demo](https://codepen.io/gavinr/pen/jOVMvGV?editors=1000)
+					
+					
+				</textarea>
+			</section>
+
 
 			<!-- BEGIN LAYERS SECTION -->
 
