@@ -1,46 +1,22 @@
 # React app demonstrating querying demographic data
 
-This project was created with [Create React App](https://github.com/facebook/create-react-app).
+This project was created with [Create React App](https://github.com/facebook/create-react-app) to demonstrate using [`arcgis-rest-js`](https://github.com/esri/arcgis-rest-js) to query demographic data, view available data collections, and display data on a map using the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/latest/).
 
-## Available Scripts
+## Run the demo
 
-In the project directory, you can run:
+In the project directory, run:
 
-### `npm start`
+```bash
+npm install
+npm start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# navigate to http://localhost:3000
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Packages used
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `@esri/arcgis-rest-demographics`: Contains methods for querying demographic data
+- `@esri/arcgis-rest-auth`: Used to handle API key authentication
+- `@esri/arcgis-rest-request`: Base package for ArcGIS REST JS
+- `esri-loader`: Small tool to make it easer to load the ArcGIS JS API within React (https://github.com/Esri/esri-loader)
+- `@material-ui/core`: React Material UI library for basic styling of the list and table (https://material-ui.com/)
