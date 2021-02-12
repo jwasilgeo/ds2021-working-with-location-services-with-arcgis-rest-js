@@ -22,17 +22,15 @@ function App() {
     { label: string; value: string }[]
   >();
 
-  async function getCollections() {
-    const response = await getDataCollections();
-    setCollections(response);
-  }
-
   // Set up the map view
   async function loadMap() {
+    // Use esri-loader to load the JS API modules
     const [Map, MapView] = await loadModules(
       ["esri/Map", "esri/views/MapView"],
       { css: true }
     );
+
+    // Create a map and map view, saving a reference to the map view
     const map = new Map({
       basemap: "gray-vector",
     });
@@ -53,9 +51,9 @@ function App() {
   }
 
   async function query(point: { x: number; y: number }, id: string) {
-    const { attributes, geometry, data } = await queryData(point, id);
+    const { geometry, data } = await queryData(point, id);
 
-    if (!attributes || !geometry || !data) {
+    if (!geometry || !data) {
       return;
     }
 
@@ -67,7 +65,6 @@ function App() {
     mapViewRef.current?.graphics.removeAll();
     mapViewRef.current?.graphics.add(
       new Graphic({
-        attributes,
         geometry: {
           ...geometry,
           type: "polygon",
@@ -91,12 +88,16 @@ function App() {
   // When the app loads, query all the data collection and
   // set up the map view
   useEffect(() => {
-    getCollections();
     loadMap();
+
+    getDataCollections().then(response => {
+      setCollections(response);
+    })
   }, []);
 
   return (
     <>
+      {/* Section that displays the list of available data collections */}
       <div className="view">
         <List className="collection" disablePadding>
           <ListItem
@@ -117,7 +118,11 @@ function App() {
             </ListItem>
           ))}
         </List>
+
+        {/* Map gets rendered into this div */}
         <div id="map" className="map"></div>
+
+        {/* Section that displays the data returned from the API in a table  */}
         <div className="data">
           {activeData ? (
             <Table>

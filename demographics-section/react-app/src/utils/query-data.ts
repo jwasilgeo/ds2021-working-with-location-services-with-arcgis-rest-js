@@ -9,14 +9,8 @@ import { ApiKey } from "@esri/arcgis-rest-auth";
  * @param point latitude (y) and longitude (x)
  * @param id data collection id
  */
-export async function queryData(
-  point: { x: number; y: number },
-  id: string
-) {
+export async function queryData(point: { x: number; y: number }, id: string) {
   const params: IQueryDemographicDataOptions = {
-    endpoint:
-      "https://geoenrichdev.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/Geoenrichment",
-
     // The study area gives us the US county that intersects the point that was clicked
     studyAreas: [
       {
@@ -34,8 +28,7 @@ export async function queryData(
     // This service requires authentication
     // Create the authentication object using the ApiKey constructor and our api key
     authentication: new ApiKey({
-      key:
-        "AAPK417a9d5e05744be7a15d991386e6fe27ang2GdR4fHMqWpTqth9GDXWbsET4-VBWZhfQvJ6wVOJroHUPHBLv_rYVwaPYb40m",
+      key: "YOUR-API-KEY",
     }),
   };
 
@@ -54,7 +47,7 @@ export async function queryData(
   }
 
   const attributes = feature?.attributes;
-  const geometry = feature?.geometry
+  const geometry = feature?.geometry;
 
   // Filter out unneeded fields and format them for displaying
   const data = Object.keys(attributes)
@@ -74,5 +67,5 @@ export async function queryData(
       };
     });
 
-  return { attributes, geometry, data };
+  return { geometry, data };
 }

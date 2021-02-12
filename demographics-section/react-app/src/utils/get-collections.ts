@@ -6,8 +6,6 @@ import { getAvailableDataCollections } from "@esri/arcgis-rest-demographics";
 export async function getDataCollections() {
   // This data is publicly available so it doesn't require authentication
   const response = await getAvailableDataCollections({
-    endpoint:
-      "https://geoenrichdev.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/Geoenrichment",
     countryCode: "us",
   });
 

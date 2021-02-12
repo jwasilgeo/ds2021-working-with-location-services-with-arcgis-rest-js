@@ -331,8 +331,85 @@
 				<textarea data-template>
 					## Demographics
 
-					* Info
+					<img src="img/demographics-image.png" height="300" alt="Demographic map">
+				
+					[esri.github.io/arcgis-rest-js/api/demographics/](https://esri.github.io/arcgis-rest-js/api/demographics/)
 				</textarea>
+			</section>
+
+			<section data-markdown data-background="img/2021/dev-summit/bg-4.png">
+				<textarea data-template>
+					### New demographics package
+
+					* querying demographic data
+
+					* finding available datasets
+
+					* finding regional boundaries
+					 
+					* typed API responses
+				
+				</textarea>
+			</section>
+			
+			<section data-background="img/2021/dev-summit/bg-2.png">
+				<h3>Querying data</h3>
+			
+				<pre>
+					<code class="hljs" data-trim data-line-numbers>
+					import {
+					  queryDemographicData
+					} from "@esri/arcgis-rest-demographics";
+				
+					queryDemographicData({
+					  studyAreas: [{
+					    geometry: { x: 0.1278, y: 51.5074 } // Long/Lat
+					  }], 
+					  authentication: authentication
+					}).then(response => {
+					  // Demographic data for 1 mile radius around point
+					  console.log(response);
+					});
+					</code>
+				</pre>
+			
+				<a href="https://developers.arcgis.com/arcgis-rest-js/demographic-data/query-demographic-data/">https://developers.arcgis.com/arcgis-rest-js/demographic-data/query-demographic-data/</a>
+			</section>
+
+			<section data-background="img/2021/dev-summit/bg-2.png">
+				<h3>Using an API Key</h3>
+			
+				<img src="img/demographics-scope.png" alt="Demographics scope added to an API key">
+			
+			</section>
+			
+			<section data-markdown data-background="img/2021/dev-summit/bg-2.png">
+				<textarea data-template>
+					### React & ArcGIS JS API app
+				
+					<div style="display: flex; flex-direction: row; justify-content: center; gap: 50px;">
+						<div style="display: flex; flex-direction: column; margin-right: 20px; align-items: center; justify-content: center;">
+							<img src="img/react-logo.png" height="100" alt="React logo">
+							<img src="img/esri-logo.png" height="100" alt="Esri logo">
+						</div>
+						<img src="img/demographics-demo.png" height="400" width="700" alt="Image of demographics demo">
+					</div>
+				
+					[Demo](https://github.com/jwasilgeo/ds2021-working-with-location-services-with-arcgis-rest-js/tree/main/demographics-section/react-app)
+			  </textarea>
+			</section>
+
+			<section data-markdown data-background="img/2021/dev-summit/bg-2.png">
+				<textarea data-template>
+					## Resources
+				
+					* Guide: https://developers.arcgis.com/arcgis-rest-js/
+					* API Reference: https://esri.github.io/arcgis-rest-js/api/
+					* Developer dashboard: https://developers.arcgis.com/dashboard/
+					* Presentation source: https://github.com/jwasilgeo/ds2021-working-with-location-services-with-arcgis-rest-js
+					* Slides: https://esriurl.com/ds21rest
+				
+			  </textarea>
 			</section>
 
 			<!-- ESRI LOGO SLIDE: -->
