@@ -4,6 +4,8 @@ This project was created with [Create React App](https://github.com/facebook/cre
 
 ## Run the demo
 
+First, you should add in your own API Key here: https://github.com/jwasilgeo/ds2021-working-with-location-services-with-arcgis-rest-js/blob/main/demographics-section/react-app/src/utils/query-data.ts#L31
+
 In the project directory, run:
 
 ```bash
