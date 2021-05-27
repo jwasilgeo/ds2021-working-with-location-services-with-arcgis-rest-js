@@ -11,6 +11,8 @@ Short link: <https://esriurl.com/ds21rest>
 
 Full link: <https://jwasilgeo.github.io/ds2021-working-with-location-services-with-arcgis-rest-js/presentation/dev-summit-2021.html>
 
+Recording: https://youtu.be/SeWu4Lcf6uY
+
 ## Contents
 
 - Reveal.js presentation slide deck (`presentation/`)
