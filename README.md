@@ -2,7 +2,7 @@
 
 **Esri International Developer Summit 2021**: "Working with Location Services with ArcGIS REST JS"
 
-- Allison Davis [@araedavis](https://github.com/araedavis)
+- A. Davis [@araedavis](https://github.com/araedavis)
 - Noah Mulfinger [@noahmulfinger](https://github.com/noahmulfinger)
 - Gavin Rehkemper [@gavinr](https://github.com/gavinr)
 - Jacob Wasilkowski [@jwasilgeo](https://github.com/gavinr)
